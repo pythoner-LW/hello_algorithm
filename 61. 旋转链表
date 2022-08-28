@@ -1,0 +1,23 @@
+旋转链表
+
+算法：链表成环
+
+代码：
+def rotateRight(self, head: Optional[ListNode], k: int) -> Optional[ListNode]:
+        if k == 0 or not head or not head.next:
+            return head
+        p = head
+        l = 1
+        while p.next:
+            l += 1
+            p = p.next
+        p.next = head   # 成环
+        k = k % l
+        k = l - k
+        q = head
+        while k > 1:
+            q = q.next
+            k -= 1
+        new_head = q.next
+        q.next = None
+        return new_head
