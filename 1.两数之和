@@ -1,3 +1,15 @@
-两数之和
+两数之和 
+
 难点：快速找到数组中元素
+
 算法：哈希表
+
+代码：
+def twoSum(self, nums: List[int], target: int) -> List[int]:
+        hashtable = dict()
+        for i, num in enumerate(nums):
+            if target - num in hashtable:
+                return [hashtable[target - num], i]
+            hashtable[nums[i]] = i
+        return []
+
