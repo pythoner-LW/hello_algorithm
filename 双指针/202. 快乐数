@@ -1,0 +1,39 @@
+快乐数
+
+算法：快慢指针或哈希表、
+
+总结：
+1、快慢指针可用于检测链表是否有环
+2、使用哈希表的一个问题是哈希表过大
+
+代码：
+def isHappy(self, n: int) -> bool:
+
+        def getNext1(n: int) -> int: 
+            ss = str(n)
+            next = 0
+            for i in range(len(ss)):
+                next += (int(ss[i])) ** 2
+            return next
+        
+        def getNext2(n: int) -> int:
+            next = 0
+            while n != 0:
+                next += (n % 10) ** 2
+                n /= 10
+            return next
+
+        # 哈希 （问题：哈希表过大）
+        # s = set()
+        # while n != 1 and n not in s:
+        #     s.add(n)
+        #     n = getNext(n)
+        # return n == 1
+
+        # 快慢指针
+        fast = getNext1(n)
+        slow = n
+        while fast != 1 and fast != slow:
+            fast = getNext1(getNext1(fast))
+            slow = getNext1(slow)
+        return fast == 1
