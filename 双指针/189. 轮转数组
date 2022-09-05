@@ -1,0 +1,32 @@
+轮转数组
+
+算法：
+
+代码：
+def rotate(self, nums: List[int], k: int) -> None:
+        """
+        Do not return anything, modify nums in-place instead.
+        """
+        n = len(nums)
+
+        # 方法一：使用额外数组
+        # res = [0] * n
+        # for i in range(n):
+        #     res[(i+k)%n] = nums[i]
+        # for i in range(n):      # 这里使用 nums = res 错误
+        #     nums[i] = res[i]
+
+        
+        # 方法二：数组翻转
+        def reverse(nums: List[int], start: int, end:int) -> List[int]:
+            while(start < end):
+                temp = nums[start]
+                nums[start] = nums[end]
+                nums[end] = temp
+                start += 1
+                end -= 1
+            return nums
+        k = k % n   #注意数组越界
+        nums = reverse(nums, 0, n-1)
+        nums = reverse(nums, 0, k-1)
+        nums = reverse(nums, k, n-1)
